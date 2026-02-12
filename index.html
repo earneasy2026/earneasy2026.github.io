@@ -16,7 +16,7 @@ body{
 }
 .box{
     background:#1c1c1c;
-    padding:30px;
+    padding:25px;
     border-radius:12px;
     width:340px;
     text-align:center;
@@ -43,17 +43,16 @@ button{
 button:hover{
     background:#00e676;
 }
-.offer-section{
+.hidden{
     display:none;
 }
-.rules{
-    display:none;
-    margin-top:15px;
-    text-align:left;
-    font-size:13px;
+.rules-box{
     background:#111;
     padding:15px;
     border-radius:8px;
+    font-size:13px;
+    text-align:left;
+    margin-top:15px;
 }
 </style>
 </head>
@@ -62,24 +61,25 @@ button:hover{
 
 <div class="box">
 
-<div id="form-section">
+<div id="step1">
     <h2>Earn-Easy</h2>
-    <p>Register & get Paytm cashback</p>
+    <p>Enter details to continue</p>
 
     <input type="text" id="name" placeholder="Full Name" required>
     <input type="tel" id="phone" placeholder="Phone Number" required>
     <input type="text" id="upi" placeholder="UPI ID (for cashback)" required>
 
-    <button onclick="showOffer()">Continue</button>
+    <button onclick="goToOffer()">Continue</button>
 </div>
 
-<div id="offer-section" class="offer-section">
-    <h2>Paytm Referral Offer</h2>
-    <p>Get ₹50 Cashback</p>
-
+<div id="step2" class="hidden">
+    <h2>Paytm Offer</h2>
+    <p>₹50 Cashback</p>
     <button onclick="showRules()">Claim Offer</button>
+</div>
 
-    <div id="rules" class="rules">
+<div id="step3" class="hidden">
+    <div class="rules-box">
         <b>Conditions:</b><br><br>
         • Must be a new Paytm user<br>
         • Complete full registration properly<br>
@@ -87,22 +87,23 @@ button:hover{
         • Do not delete account immediately<br>
         • Cashback processed within 24–48 hours<br>
         • Fake or incomplete entries will be rejected<br><br>
-
-        <button onclick="confirmOffer()">I Agree & Continue</button>
     </div>
+
+    <button onclick="confirmOffer()">I Agree & Continue</button>
 </div>
 
 </div>
 
 <script>
 
-function showOffer(){
-    document.getElementById("form-section").style.display="none";
-    document.getElementById("offer-section").style.display="block";
+function goToOffer(){
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("step2").classList.remove("hidden");
 }
 
 function showRules(){
-    document.getElementById("rules").style.display="block";
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
 }
 
 function confirmOffer(){
@@ -130,4 +131,5 @@ function confirmOffer(){
 
 </body>
 </html>
+    
 <!-- update -->
