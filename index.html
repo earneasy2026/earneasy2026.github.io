@@ -71,11 +71,11 @@ button:hover{
     <h2>Earn-Easy</h2>
     <p>Enter your details to continue</p>
 
-    <input type="text" id="name" placeholder="Full Name" required>
-    <input type="tel" id="phone" placeholder="Phone Number" required>
-    <input type="text" id="upi" placeholder="UPI ID (for cashback)" required>
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="tel" id="phone" placeholder="Phone Number">
+    <input type="text" id="upi" placeholder="UPI ID (for cashback)">
 
-    <button onclick="goToOffers()">Continue</button>
+    <button onclick="validateAndContinue()">Continue</button>
 </div>
 
 <!-- STEP 2 -->
@@ -104,8 +104,28 @@ button:hover{
 let selectedOffer = "";
 let redirectLink = "";
 
-// STEP NAVIGATION
-function goToOffers(){
+// VALIDATION
+function validateAndContinue(){
+
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let upi = document.getElementById("upi").value.trim();
+
+    if(name === "" || phone === "" || upi === ""){
+        alert("Please fill all details before continuing.");
+        return;
+    }
+
+    if(phone.length !== 10 || isNaN(phone)){
+        alert("Please enter a valid 10 digit phone number.");
+        return;
+    }
+
+    if(!upi.includes("@")){
+        alert("Please enter a valid UPI ID.");
+        return;
+    }
+
     document.getElementById("step1").classList.add("hidden");
     document.getElementById("step2").classList.remove("hidden");
 }
@@ -137,7 +157,7 @@ function showIndiabullsRules(){
     document.getElementById("rulesContent").innerHTML = `
     <b>Indiabulls Demat Conditions:</b><br><br>
     • Register using the provided mobile number<br>
-    • Complete full KYC & wait for account approval<br>
+    • Complete full KYC & wait for approval<br>
     • Add ₹100 or more to trading account<br>
     • In INTRA-DAY, buy & sell ₹50+ stock 4–5 times<br>
     • Cashback ₹200 will be sent within 24 hours after valid trade<br><br>
@@ -180,5 +200,5 @@ function confirmOffer(){
 
 </body>
 </html>
-    
+
 <!-- update -->
