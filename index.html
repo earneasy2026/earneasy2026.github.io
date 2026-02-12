@@ -18,7 +18,7 @@ body{
     background:#1c1c1c;
     padding:25px;
     border-radius:12px;
-    width:340px;
+    width:360px;
     text-align:center;
 }
 input{
@@ -53,6 +53,11 @@ button:hover{
     font-size:13px;
     text-align:left;
     margin-top:15px;
+    max-height:250px;
+    overflow:auto;
+}
+.offer-btn{
+    margin-top:15px;
 }
 </style>
 </head>
@@ -61,34 +66,34 @@ button:hover{
 
 <div class="box">
 
+<!-- STEP 1 -->
 <div id="step1">
     <h2>Earn-Easy</h2>
-    <p>Enter details to continue</p>
+    <p>Enter your details to continue</p>
 
     <input type="text" id="name" placeholder="Full Name" required>
     <input type="tel" id="phone" placeholder="Phone Number" required>
     <input type="text" id="upi" placeholder="UPI ID (for cashback)" required>
 
-    <button onclick="goToOffer()">Continue</button>
+    <button onclick="goToOffers()">Continue</button>
 </div>
 
+<!-- STEP 2 -->
 <div id="step2" class="hidden">
-    <h2>Paytm Offer</h2>
-    <p>₹50 Cashback</p>
-    <button onclick="showRules()">Claim Offer</button>
+    <h3>Select an Offer</h3>
+
+    <button class="offer-btn" onclick="showPaytmRules()">
+        Paytm – ₹50 Cashback
+    </button>
+
+    <button class="offer-btn" onclick="showIndiabullsRules()">
+        Indiabulls Demat – ₹200 Cashback
+    </button>
 </div>
 
+<!-- STEP 3 RULES -->
 <div id="step3" class="hidden">
-    <div class="rules-box">
-        <b>Conditions:</b><br><br>
-        • Must be a new Paytm user<br>
-        • Complete full registration properly<br>
-        • Must send ₹10 or more to any contact after signup<br>
-        • Do not delete account immediately<br>
-        • Cashback processed within 24–48 hours<br>
-        • Fake or incomplete entries will be rejected<br><br>
-    </div>
-
+    <div id="rulesContent" class="rules-box"></div>
     <button onclick="confirmOffer()">I Agree & Continue</button>
 </div>
 
@@ -96,17 +101,61 @@ button:hover{
 
 <script>
 
-function goToOffer(){
+let selectedOffer = "";
+let redirectLink = "";
+
+// STEP NAVIGATION
+function goToOffers(){
     document.getElementById("step1").classList.add("hidden");
     document.getElementById("step2").classList.remove("hidden");
 }
 
-function showRules(){
+// PAYTM RULES
+function showPaytmRules(){
+    selectedOffer = "Paytm";
+    redirectLink = "https://p.paytm.me/xCTH/ueupfch7?utmt=021222";
+
+    document.getElementById("rulesContent").innerHTML = `
+    <b>Paytm Conditions:</b><br><br>
+    • Must be a new Paytm user<br>
+    • Complete full registration properly<br>
+    • Must send ₹10 or more to any contact after signup<br>
+    • Do not delete account immediately<br>
+    • Cashback processed within 24–48 hours<br>
+    • Fake or incomplete entries will be rejected<br><br>
+    `;
+
     document.getElementById("step2").classList.add("hidden");
     document.getElementById("step3").classList.remove("hidden");
 }
 
+// INDIABULLS RULES
+function showIndiabullsRules(){
+    selectedOffer = "Indiabulls Demat";
+    redirectLink = "https://rechargefox.com/camp/rkk24gw3";
+
+    document.getElementById("rulesContent").innerHTML = `
+    <b>Indiabulls Demat Conditions:</b><br><br>
+    • Register using the provided mobile number<br>
+    • Complete full KYC & wait for account approval<br>
+    • Add ₹100 or more to trading account<br>
+    • In INTRA-DAY, buy & sell ₹50+ stock 4–5 times<br>
+    • Cashback ₹200 will be sent within 24 hours after valid trade<br><br>
+    
+    <b>Important:</b><br>
+    • Do NOT use WiFi<br>
+    • Do NOT use same device for multiple accounts<br>
+    • Do NOT use same UPI ID multiple times<br>
+    • Only genuine trading activity accepted<br><br>
+    `;
+
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("step3").classList.remove("hidden");
+}
+
+// FINAL CONFIRM
 function confirmOffer(){
+
     fetch("https://formsubmit.co/ajax/earneasy2026@gmail.com",{
         method:"POST",
         headers:{
@@ -117,13 +166,13 @@ function confirmOffer(){
             Name: document.getElementById("name").value,
             Phone: document.getElementById("phone").value,
             UPI: document.getElementById("upi").value,
-            Offer_Selected:"Paytm",
+            Offer_Selected: selectedOffer,
             Conditions_Agreed:"Yes",
             Date:new Date().toLocaleString()
         })
     })
     .then(response=>{
-        window.location.href="https://p.paytm.me/xCTH/ueupfch7?utmt=021222";
+        window.location.href = redirectLink;
     });
 }
 
