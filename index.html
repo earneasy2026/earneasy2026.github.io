@@ -86,8 +86,8 @@ button:hover{
         Paytm – ₹50 Cashback
     </button>
 
-    <button class="offer-btn" onclick="showIndiabullsRules()">
-        Indiabulls Demat – ₹200 Cashback
+    <button class="offer-btn" onclick="showQoneqtRules()">
+        Qoneqt – ₹85 Signup + ₹50 Per Referral
     </button>
 </div>
 
@@ -149,24 +149,21 @@ function showPaytmRules(){
     document.getElementById("step3").classList.remove("hidden");
 }
 
-// INDIABULLS RULES
-function showIndiabullsRules(){
-    selectedOffer = "Indiabulls Demat";
-    redirectLink = "https://rechargefox.com/camp/rkk24gw3";
+// QONEQT RULES
+function showQoneqtRules(){
+    selectedOffer = "Qoneqt";
+    redirectLink = "https://qon.is/join?key=0816093436445490";
 
     document.getElementById("rulesContent").innerHTML = `
-    <b>Indiabulls Demat Conditions:</b><br><br>
-    • Register using the provided mobile number<br>
-    • Complete full KYC & wait for approval<br>
-    • Add ₹100 or more to trading account<br>
-    • In INTRA-DAY, buy & sell ₹50+ stock 4–5 times<br>
-    • Cashback ₹200 will be sent within 24 hours after valid trade<br><br>
-    
-    <b>Important:</b><br>
-    • Do NOT use WiFi<br>
-    • Do NOT use same device for multiple accounts<br>
-    • Do NOT use same UPI ID multiple times<br>
-    • Only genuine trading activity accepted<br><br>
+    <b>Qoneqt App Conditions:</b><br><br>
+    • Must register using the provided referral link<br>
+    • Referral Code: 0816093436445490 (Mandatory)<br>
+    • Complete Aadhaar verification (Front & Back required)<br>
+    • Wait for account approval<br>
+    • Earn ₹85 signup bonus<br>
+    • Earn ₹50 per successful referral<br>
+    • Withdrawal allowed after eligibility<br><br>
+    • Fake or multiple accounts will be rejected<br><br>
     `;
 
     document.getElementById("step2").classList.add("hidden");
