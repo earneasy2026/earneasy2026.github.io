@@ -3,6 +3,7 @@
 <head>
 <title>Earn-Easy</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 body{
     margin:0;
@@ -18,7 +19,7 @@ body{
     background:#1c1c1c;
     padding:25px;
     border-radius:12px;
-    width:360px;
+    width:370px;
     text-align:center;
 }
 input{
@@ -46,6 +47,20 @@ button:hover{
 .hidden{
     display:none;
 }
+.offer-card{
+    background:#2a2a2a;
+    padding:15px;
+    border-radius:10px;
+    margin-top:15px;
+    cursor:pointer;
+}
+.offer-card:hover{
+    background:#333;
+}
+.offer-card img{
+    width:120px;
+    margin-bottom:10px;
+}
 .rules-box{
     background:#111;
     padding:15px;
@@ -55,9 +70,6 @@ button:hover{
     margin-top:15px;
     max-height:260px;
     overflow:auto;
-}
-.offer-btn{
-    margin-top:15px;
 }
 </style>
 </head>
@@ -82,13 +94,15 @@ button:hover{
 <div id="step2" class="hidden">
     <h3>Select an Offer</h3>
 
-    <button class="offer-btn" onclick="showPaytmRules()">
-        Paytm – ₹50 Cashback
-    </button>
+    <div class="offer-card" onclick="showPaytmRules()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Paytm_logo.png">
+        <div>₹50 Cashback</div>
+    </div>
 
-    <button class="offer-btn" onclick="showGooglePayRules()">
-        Google Pay – ₹50 + ₹50 Bonus
-    </button>
+    <div class="offer-card" onclick="showGooglePayRules()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Google_Pay_Logo.svg">
+        <div>₹50 + ₹50 Bonus</div>
+    </div>
 </div>
 
 <!-- STEP 3 RULES -->
@@ -139,9 +153,9 @@ function showPaytmRules(){
     <b>Paytm Conditions:</b><br><br>
     • Must be a new Paytm user<br>
     • Complete full registration properly<br>
-    • Must send ₹10 or more to any contact after signup<br>
-    • Cashback processed within 24–48 hours<br>
-    • Fake or incomplete entries will be rejected<br><br>
+    • Must send ₹10 or more after signup<br>
+    • Cashback ₹50 processed within 24–48 hours<br>
+    • Fake or duplicate accounts will be rejected<br><br>
     `;
 
     document.getElementById("step2").classList.add("hidden");
@@ -158,13 +172,13 @@ function showGooglePayRules(){
     • Must create a NEW Google Pay account only<br>
     • Must use Invite Code: n781m0d<br>
     • After signup, send minimum ₹1 to any contact<br>
-    • Cashback ₹50 will be processed after verification<br><br>
+    • Cashback ₹50 processed after verification<br><br>
 
     <b>Bonus Condition:</b><br>
     • Do 4 transactions per week for 4 weeks<br>
-    • Extra ₹50 bonus will be sent after completion<br><br>
+    • Extra ₹50 bonus sent after completion<br><br>
 
-    • Fake, duplicate or old accounts will be rejected<br><br>
+    • Fake, old or duplicate accounts will be rejected<br><br>
     `;
 
     document.getElementById("step2").classList.add("hidden");
@@ -198,4 +212,3 @@ function confirmOffer(){
 
 </body>
 </html>
-<!-- update -->
