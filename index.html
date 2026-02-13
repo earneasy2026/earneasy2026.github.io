@@ -7,136 +7,206 @@
 <style>
 body{
     margin:0;
-    font-family:Arial;
-    background:#0f0f0f;
-    color:white;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#f5f7fa;
+    color:#1c1e21;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+    min-height:100vh;
 }
-.box{
-    background:#1c1c1c;
-    padding:25px;
-    border-radius:12px;
-    width:370px;
-    text-align:center;
+.container{
+    width:460px;
+    max-width:95%;
+    background:white;
+    padding:30px;
+    border-radius:16px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+}
+h2{
+    margin-top:0;
+    color:#1a73e8;
+}
+.subtitle{
+    font-size:14px;
+    color:#555;
+    margin-bottom:20px;
 }
 input{
     width:100%;
-    padding:10px;
+    padding:14px;
     margin:10px 0;
-    border-radius:6px;
-    border:none;
-    background:#2a2a2a;
-    color:white;
+    border-radius:10px;
+    border:1px solid #dfe3e8;
+    font-size:14px;
+}
+input:focus{
+    outline:none;
+    border-color:#1a73e8;
+    box-shadow:0 0 0 2px rgba(26,115,232,0.15);
 }
 button{
     width:100%;
-    padding:10px;
-    background:#00c853;
+    padding:14px;
     border:none;
-    border-radius:6px;
-    color:white;
+    border-radius:10px;
     cursor:pointer;
-    margin-top:10px;
+    font-weight:600;
+    font-size:15px;
 }
-button:hover{
-    background:#00e676;
+.primary-btn{
+    background:#1a73e8;
+    color:white;
+}
+.primary-btn:hover{
+    background:#1669c1;
 }
 .hidden{
     display:none;
 }
 .offer-card{
-    background:#2a2a2a;
-    padding:15px;
-    border-radius:10px;
+    border:1px solid #e3e7ed;
+    border-radius:12px;
     margin-top:15px;
+    overflow:hidden;
+    transition:0.3s;
+}
+.offer-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px;
     cursor:pointer;
 }
-.offer-card:hover{
-    background:#333;
+.offer-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
 }
-.offer-card img{
-    width:120px;
-    margin-bottom:10px;
+.offer-content{
+    background:#f9fbfd;
+    padding:16px;
+    display:none;
+    font-size:14px;
+    color:#444;
 }
-.rules-box{
-    background:#111;
-    padding:15px;
-    border-radius:8px;
-    font-size:13px;
-    text-align:left;
+.logo{
+    width:26px;
+    height:26px;
+}
+.rules{
+    line-height:1.6;
+}
+.badge{
+    background:#e8f0fe;
+    color:#1a73e8;
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:12px;
+}
+.footer-note{
     margin-top:15px;
-    max-height:260px;
-    overflow:auto;
+    font-size:12px;
+    color:#777;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<!-- STEP 1 -->
 <div id="step1">
     <h2>Earn-Easy</h2>
-    <p>Enter your details to continue</p>
+    <div class="subtitle">
+        Enter your details to access available cashback offers.
+    </div>
 
     <input type="text" id="name" placeholder="Full Name">
     <input type="tel" id="phone" placeholder="Phone Number">
     <input type="text" id="upi" placeholder="UPI ID (for cashback)">
 
-    <button onclick="validateAndContinue()">Continue</button>
+    <button class="primary-btn" onclick="validateAndContinue()">Continue</button>
+
+    <div class="footer-note">
+        Your details are used only for cashback verification.
+    </div>
 </div>
 
-<!-- STEP 2 -->
 <div id="step2" class="hidden">
-    <h3>Select an Offer</h3>
 
-    <div class="offer-card" onclick="showPaytmRules()">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Paytm_logo.png">
-        <div>₹50 Cashback</div>
+    <!-- PAYTM -->
+    <div class="offer-card">
+        <div class="offer-header" onclick="toggleOffer('paytm')">
+            <div class="offer-title">
+                <span class="badge">₹50</span>
+                Paytm Cashback
+            </div>
+            ▼
+        </div>
+        <div id="paytm" class="offer-content">
+            <div class="rules">
+                • New Paytm users only<br>
+                • Complete full registration<br>
+                • Send ₹10 after signup<br>
+                • Cashback processed within 24–48 hours<br>
+                • Duplicate accounts not accepted
+            </div>
+            <button class="primary-btn" onclick="confirmOffer('Paytm','https://p.paytm.me/xCTH/ueupfch7?utmt=021222')">
+                Agree & Continue
+            </button>
+        </div>
     </div>
 
-    <div class="offer-card" onclick="showGooglePayRules()">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/Google_Pay_Logo.svg">
-        <div>₹50 + ₹50 Bonus</div>
+    <!-- GOOGLE PAY -->
+    <div class="offer-card">
+        <div class="offer-header" onclick="toggleOffer('gpay')">
+            <div class="offer-title">
+                <span class="badge">₹50 + ₹50</span>
+                Google Pay Cashback
+            </div>
+            ▼
+        </div>
+        <div id="gpay" class="offer-content">
+            <div class="rules">
+                • NEW Google Pay account only<br>
+                • Use Invite Code: <b>n781m0d</b><br>
+                • Send minimum ₹1 after signup<br>
+                • ₹50 cashback after verification<br><br>
+                <b>Bonus:</b><br>
+                • 4 transactions per week for 4 weeks<br>
+                • Extra ₹50 after completion
+            </div>
+            <button class="primary-btn" onclick="confirmOffer('Google Pay','https://gpay.app.goo.gl/invite-n781m0d')">
+                Agree & Continue
+            </button>
+        </div>
     </div>
-</div>
 
-<!-- STEP 3 RULES -->
-<div id="step3" class="hidden">
-    <div id="rulesContent" class="rules-box"></div>
-    <button onclick="confirmOffer()">I Agree & Continue</button>
 </div>
 
 </div>
 
 <script>
 
-let selectedOffer = "";
-let redirectLink = "";
-
-// VALIDATION
 function validateAndContinue(){
-
     let name = document.getElementById("name").value.trim();
     let phone = document.getElementById("phone").value.trim();
     let upi = document.getElementById("upi").value.trim();
 
     if(name === "" || phone === "" || upi === ""){
-        alert("Please fill all details before continuing.");
+        alert("Please complete all fields.");
         return;
     }
 
     if(phone.length !== 10 || isNaN(phone)){
-        alert("Please enter a valid 10 digit phone number.");
+        alert("Enter a valid 10 digit phone number.");
         return;
     }
 
     if(!upi.includes("@")){
-        alert("Please enter a valid UPI ID.");
+        alert("Enter a valid UPI ID.");
         return;
     }
 
@@ -144,49 +214,12 @@ function validateAndContinue(){
     document.getElementById("step2").classList.remove("hidden");
 }
 
-// PAYTM RULES
-function showPaytmRules(){
-    selectedOffer = "Paytm";
-    redirectLink = "https://p.paytm.me/xCTH/ueupfch7?utmt=021222";
-
-    document.getElementById("rulesContent").innerHTML = `
-    <b>Paytm Conditions:</b><br><br>
-    • Must be a new Paytm user<br>
-    • Complete full registration properly<br>
-    • Must send ₹10 or more after signup<br>
-    • Cashback ₹50 processed within 24–48 hours<br>
-    • Fake or duplicate accounts will be rejected<br><br>
-    `;
-
-    document.getElementById("step2").classList.add("hidden");
-    document.getElementById("step3").classList.remove("hidden");
+function toggleOffer(id){
+    let el = document.getElementById(id);
+    el.style.display = el.style.display === "block" ? "none" : "block";
 }
 
-// GOOGLE PAY RULES
-function showGooglePayRules(){
-    selectedOffer = "Google Pay";
-    redirectLink = "https://gpay.app.goo.gl/invite-n781m0d";
-
-    document.getElementById("rulesContent").innerHTML = `
-    <b>Google Pay Conditions:</b><br><br>
-    • Must create a NEW Google Pay account only<br>
-    • Must use Invite Code: n781m0d<br>
-    • After signup, send minimum ₹1 to any contact<br>
-    • Cashback ₹50 processed after verification<br><br>
-
-    <b>Bonus Condition:</b><br>
-    • Do 4 transactions per week for 4 weeks<br>
-    • Extra ₹50 bonus sent after completion<br><br>
-
-    • Fake, old or duplicate accounts will be rejected<br><br>
-    `;
-
-    document.getElementById("step2").classList.add("hidden");
-    document.getElementById("step3").classList.remove("hidden");
-}
-
-// FINAL CONFIRM
-function confirmOffer(){
+function confirmOffer(offer, link){
 
     fetch("https://formsubmit.co/ajax/earneasy2026@gmail.com",{
         method:"POST",
@@ -198,13 +231,12 @@ function confirmOffer(){
             Name: document.getElementById("name").value,
             Phone: document.getElementById("phone").value,
             UPI: document.getElementById("upi").value,
-            Offer_Selected: selectedOffer,
-            Conditions_Agreed:"Yes",
+            Offer_Selected: offer,
             Date:new Date().toLocaleString()
         })
     })
-    .then(response=>{
-        window.location.href = redirectLink;
+    .then(()=>{
+        window.location.href = link;
     });
 }
 
