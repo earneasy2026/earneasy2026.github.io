@@ -53,7 +53,7 @@ button:hover{
     font-size:13px;
     text-align:left;
     margin-top:15px;
-    max-height:250px;
+    max-height:260px;
     overflow:auto;
 }
 .offer-btn{
@@ -86,8 +86,8 @@ button:hover{
         Paytm – ₹50 Cashback
     </button>
 
-    <button class="offer-btn" onclick="showQoneqtRules()">
-        Qoneqt – ₹85 Signup + ₹50 Per Referral
+    <button class="offer-btn" onclick="showGooglePayRules()">
+        Google Pay – ₹50 + ₹50 Bonus
     </button>
 </div>
 
@@ -140,7 +140,6 @@ function showPaytmRules(){
     • Must be a new Paytm user<br>
     • Complete full registration properly<br>
     • Must send ₹10 or more to any contact after signup<br>
-    • Do not delete account immediately<br>
     • Cashback processed within 24–48 hours<br>
     • Fake or incomplete entries will be rejected<br><br>
     `;
@@ -149,21 +148,23 @@ function showPaytmRules(){
     document.getElementById("step3").classList.remove("hidden");
 }
 
-// QONEQT RULES
-function showQoneqtRules(){
-    selectedOffer = "Qoneqt";
-    redirectLink = "https://qon.is/join?key=0816093436445490";
+// GOOGLE PAY RULES
+function showGooglePayRules(){
+    selectedOffer = "Google Pay";
+    redirectLink = "https://gpay.app.goo.gl/invite-n781m0d";
 
     document.getElementById("rulesContent").innerHTML = `
-    <b>Qoneqt App Conditions:</b><br><br>
-    • Must register using the provided referral link<br>
-    • Referral Code: 0816093436445490 (Mandatory)<br>
-    • Complete Aadhaar verification (Front & Back required)<br>
-    • Wait for account approval<br>
-    • Earn ₹85 signup bonus<br>
-    • Earn ₹50 per successful referral<br>
-    • Withdrawal allowed after eligibility<br><br>
-    • Fake or multiple accounts will be rejected<br><br>
+    <b>Google Pay Conditions:</b><br><br>
+    • Must create a NEW Google Pay account only<br>
+    • Must use Invite Code: n781m0d<br>
+    • After signup, send minimum ₹1 to any contact<br>
+    • Cashback ₹50 will be processed after verification<br><br>
+
+    <b>Bonus Condition:</b><br>
+    • Do 4 transactions per week for 4 weeks<br>
+    • Extra ₹50 bonus will be sent after completion<br><br>
+
+    • Fake, duplicate or old accounts will be rejected<br><br>
     `;
 
     document.getElementById("step2").classList.add("hidden");
@@ -197,5 +198,4 @@ function confirmOffer(){
 
 </body>
 </html>
-
 <!-- update -->
