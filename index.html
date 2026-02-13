@@ -5,225 +5,292 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{box-sizing:border-box;}
 body{
     margin:0;
-    font-family:Inter, Arial, sans-serif;
-    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:linear-gradient(135deg,#0f172a,#0a192f,#1e293b);
     color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
+    overflow-x:hidden;
 }
+
+/* Animated background gradient */
+body::before{
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle at 30% 30%,rgba(0,198,255,0.2),transparent 40%),
+               radial-gradient(circle at 70% 70%,rgba(0,114,255,0.2),transparent 40%);
+    animation:moveBg 12s linear infinite alternate;
+    z-index:-2;
+}
+@keyframes moveBg{
+    from{transform:translate(-5%,-5%);}
+    to{transform:translate(5%,5%);}
+}
+
+/* Particle canvas */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
 .container{
-    width:520px;
-    max-width:95%;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(15px);
+    max-width:520px;
+    margin:80px auto;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(25px);
     padding:35px;
-    border-radius:18px;
-    box-shadow:0 15px 40px rgba(0,0,0,0.4);
+    border-radius:22px;
+    box-shadow:0 30px 80px rgba(0,0,0,0.6);
+    animation:fadeIn 0.7s ease;
 }
-h2{
-    margin-top:0;
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+.brand-header{
+    text-align:center;
+    font-size:24px;
     font-weight:600;
-    letter-spacing:0.5px;
+    background:linear-gradient(90deg,#00c6ff,#0072ff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin-bottom:8px;
 }
 .subtitle{
+    text-align:center;
     font-size:14px;
-    opacity:0.8;
-    margin-bottom:20px;
+    opacity:0.7;
+    margin-bottom:25px;
 }
+
 input{
     width:100%;
     padding:14px;
     margin:12px 0;
-    border-radius:10px;
+    border-radius:14px;
     border:none;
     background:rgba(255,255,255,0.1);
     color:white;
+    transition:0.3s;
 }
-input::placeholder{
-    color:#ccc;
-}
+input::placeholder{color:#aaa;}
 input:focus{
     outline:none;
     background:rgba(255,255,255,0.15);
 }
+
 button{
     width:100%;
     padding:14px;
     border:none;
-    border-radius:10px;
-    cursor:pointer;
+    border-radius:14px;
     font-weight:600;
-    font-size:15px;
+    cursor:pointer;
+    margin-top:14px;
+    transition:0.3s;
 }
 .primary-btn{
-    background:#00c6ff;
     background:linear-gradient(90deg,#00c6ff,#0072ff);
     color:white;
 }
-.primary-btn:hover{
-    opacity:0.9;
-}
-.hidden{
-    display:none;
-}
-.offer-card{
+.primary-btn:hover{transform:translateY(-2px);}
+
+.offer{
+    margin-top:25px;
+    padding:22px;
+    border-radius:20px;
     background:rgba(255,255,255,0.08);
-    border-radius:14px;
-    margin-top:20px;
-    padding:20px;
     transition:0.3s;
 }
-.offer-card:hover{
+.offer:hover{
     background:rgba(255,255,255,0.12);
 }
+
 .offer-title{
-    font-size:16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
     font-weight:600;
-    margin-bottom:8px;
+    font-size:16px;
 }
-.brand{
-    font-weight:bold;
-    font-size:15px;
-}
-.paytm{
-    color:#00baf2;
-}
-.gpay{
-    color:#34a853;
-}
+
 .rules{
     font-size:13px;
+    opacity:0.85;
+    margin-top:12px;
     line-height:1.6;
-    opacity:0.9;
-    margin-top:10px;
 }
-.footer-note{
-    margin-top:20px;
+
+.hidden{display:none;}
+
+.success{
+    text-align:center;
+    padding:30px;
+}
+
+.spinner{
+    width:50px;
+    height:50px;
+    border:5px solid rgba(255,255,255,0.2);
+    border-top:5px solid #00c6ff;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    margin:20px auto;
+}
+@keyframes spin{
+    100%{transform:rotate(360deg);}
+}
+
+.footer{
+    text-align:center;
     font-size:12px;
-    opacity:0.6;
+    opacity:0.5;
+    margin-top:30px;
 }
+.footer a{
+    color:#bbb;
+    text-decoration:none;
+}
+.footer a:hover{text-decoration:underline;}
+
+.logo{width:30px;height:30px;}
 </style>
 </head>
 
 <body>
 
+<canvas id="particles"></canvas>
+
 <div class="container">
 
 <div id="step1">
-    <h2>Earn-Easy</h2>
-    <div class="subtitle">
-        Secure cashback portal. Enter your details to continue.
-    </div>
+    <div class="brand-header">Earn-Easy</div>
+    <div class="subtitle">Premium Cashback Access Portal</div>
 
     <input type="text" id="name" placeholder="Full Name">
     <input type="tel" id="phone" placeholder="Phone Number">
     <input type="text" id="upi" placeholder="UPI ID (for cashback)">
 
     <button class="primary-btn" onclick="validateAndContinue()">Continue</button>
-
-    <div class="footer-note">
-        Details are used only for cashback verification.
-    </div>
 </div>
 
 <div id="step2" class="hidden">
 
     <!-- PAYTM -->
-    <div class="offer-card">
+    <div class="offer">
         <div class="offer-title">
-            <span class="brand paytm">Paytm</span> – ₹50 Cashback
+            <!-- Paytm SVG style -->
+            <svg class="logo" viewBox="0 0 200 50">
+                <text x="0" y="35" font-size="35" fill="#00baf2" font-weight="bold">Pay</text>
+                <text x="80" y="35" font-size="35" fill="#003366" font-weight="bold">tm</text>
+            </svg>
+            ₹50 Cashback
         </div>
-
         <div class="rules">
-            • NEW Paytm users only<br>
+            • New Paytm users only<br>
             • Referral Code: <b>9741237240</b><br>
             • Send ₹10 after signup<br>
-            • Cashback within 24–48 hours<br>
-            • Duplicate accounts rejected
+            • Cashback in 24–48 hours
         </div>
-
         <button class="primary-btn"
         onclick="confirmOffer('Paytm','https://p.paytm.me/xCTH/ueupfch7?utmt=021222')">
-            Agree & Continue
+        Agree & Continue
         </button>
     </div>
 
     <!-- GOOGLE PAY -->
-    <div class="offer-card">
+    <div class="offer">
         <div class="offer-title">
-            <span class="brand gpay">Google Pay</span> – ₹50 + ₹50 Bonus
+            <!-- Google Pay SVG style -->
+            <svg class="logo" viewBox="0 0 200 50">
+                <text x="0" y="35" font-size="35" fill="#4285F4" font-weight="bold">G</text>
+                <text x="25" y="35" font-size="35" fill="#EA4335" font-weight="bold">o</text>
+                <text x="50" y="35" font-size="35" fill="#FBBC05" font-weight="bold">o</text>
+                <text x="75" y="35" font-size="35" fill="#34A853" font-weight="bold">gle</text>
+            </svg>
+            ₹50 + ₹50 Bonus
         </div>
-
         <div class="rules">
-            • NEW Google Pay account only<br>
+            • New Google Pay account only<br>
             • Invite Code: <b>n781m0d</b><br>
-            • Send minimum ₹1 after signup<br>
-            • ₹50 cashback after verification<br><br>
-            <b>Bonus:</b><br>
-            • 4 transactions/week for 4 weeks<br>
-            • Extra ₹50 after completion
+            • Send ₹1 after signup<br>
+            • Extra ₹50 after 4 weeks activity
         </div>
-
         <button class="primary-btn"
         onclick="confirmOffer('Google Pay','https://gpay.app.goo.gl/invite-n781m0d')">
-            Agree & Continue
+        Agree & Continue
         </button>
     </div>
 
+</div>
+
+<div id="success" class="hidden success">
+    <h3>Processing Securely</h3>
+    <div class="spinner"></div>
+    <p>Please wait while we redirect you...</p>
+</div>
+
+<div class="footer">
+    © 2026 Earn-Easy · <a href="#">Terms</a> · <a href="#">Privacy</a>
 </div>
 
 </div>
 
 <script>
-
 function validateAndContinue(){
-    let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let upi = document.getElementById("upi").value.trim();
+    let name=document.getElementById("name").value.trim();
+    let phone=document.getElementById("phone").value.trim();
+    let upi=document.getElementById("upi").value.trim();
 
-    if(name === "" || phone === "" || upi === ""){
-        alert("Please complete all fields.");
-        return;
-    }
-
-    if(phone.length !== 10 || isNaN(phone)){
-        alert("Enter valid 10 digit phone number.");
-        return;
-    }
-
-    if(!upi.includes("@")){
-        alert("Enter valid UPI ID.");
-        return;
-    }
+    if(!name||!phone||!upi){alert("Complete all fields.");return;}
+    if(phone.length!==10||isNaN(phone)){alert("Enter valid 10 digit phone.");return;}
+    if(!upi.includes("@")){alert("Enter valid UPI.");return;}
 
     document.getElementById("step1").classList.add("hidden");
     document.getElementById("step2").classList.remove("hidden");
 }
 
-function confirmOffer(offer, link){
+function confirmOffer(offer,link){
+    document.getElementById("step2").classList.add("hidden");
+    document.getElementById("success").classList.remove("hidden");
+
     fetch("https://formsubmit.co/ajax/earneasy2026@gmail.com",{
         method:"POST",
-        headers:{
-            "Content-Type":"application/json",
-            "Accept":"application/json"
-        },
+        headers:{"Content-Type":"application/json","Accept":"application/json"},
         body:JSON.stringify({
-            Name: document.getElementById("name").value,
-            Phone: document.getElementById("phone").value,
-            UPI: document.getElementById("upi").value,
-            Offer_Selected: offer,
+            Name:document.getElementById("name").value,
+            Phone:document.getElementById("phone").value,
+            UPI:document.getElementById("upi").value,
+            Offer_Selected:offer,
             Date:new Date().toLocaleString()
         })
-    })
-    .then(()=>{
-        window.location.href = link;
     });
+
+    setTimeout(()=>{window.location.href=link;},2000);
 }
 
+/* Particle animation */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let particles=[];
+for(let i=0;i<100;i++){
+particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,d:Math.random()*0.5});
+}
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="rgba(255,255,255,0.15)";
+particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});
+particles.forEach(p=>{p.y+=p.d;if(p.y>canvas.height)p.y=0;});
+}
+setInterval(draw,30);
 </script>
 
 </body>
