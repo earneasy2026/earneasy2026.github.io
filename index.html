@@ -9,60 +9,36 @@
 
 body{
     font-family:Inter,Segoe UI,Arial,sans-serif;
-    background:#0f172a;
-    color:white;
+    background:#0b0b0f;
+    color:#e5e5e5;
     overflow-x:hidden;
 }
 
-/* Premium animated mesh gradient */
+/* Luxury gold ambient glow */
 body::before{
     content:"";
     position:fixed;
     inset:-50%;
     background:
-        radial-gradient(circle at 20% 30%,rgba(0,114,255,0.25),transparent 40%),
-        radial-gradient(circle at 80% 70%,rgba(0,198,255,0.25),transparent 40%),
-        radial-gradient(circle at 50% 50%,rgba(59,130,246,0.15),transparent 50%);
-    animation:meshMove 18s ease-in-out infinite alternate;
-    z-index:-2;
-}
-@keyframes meshMove{
-    0%{transform:translate(0%,0%) scale(1)}
-    50%{transform:translate(5%,5%) scale(1.05)}
-    100%{transform:translate(-5%,-5%) scale(1)}
-}
-
-/* Light sweep animation */
-body::after{
-    content:"";
-    position:fixed;
-    top:-100%;
-    left:-50%;
-    width:200%;
-    height:200%;
-    background:linear-gradient(
-        120deg,
-        transparent 30%,
-        rgba(255,255,255,0.05),
-        transparent 70%
-    );
-    transform:rotate(25deg);
-    animation:lightSweep 12s linear infinite;
+        radial-gradient(circle at 20% 30%,rgba(212,175,55,0.15),transparent 40%),
+        radial-gradient(circle at 80% 70%,rgba(255,215,0,0.08),transparent 40%);
+    animation:luxMove 18s ease-in-out infinite alternate;
     z-index:-1;
 }
-@keyframes lightSweep{
-    from{transform:translateX(-100%) rotate(25deg)}
-    to{transform:translateX(100%) rotate(25deg)}
+@keyframes luxMove{
+    0%{transform:translate(0%,0%) scale(1)}
+    100%{transform:translate(5%,5%) scale(1.05)}
 }
 
 .container{
     max-width:520px;
-    margin:80px auto;
-    background:rgba(255,255,255,0.07);
-    backdrop-filter:blur(25px);
-    padding:40px;
-    border-radius:24px;
-    box-shadow:0 30px 80px rgba(0,0,0,0.6);
+    margin:90px auto;
+    background:rgba(255,255,255,0.03);
+    backdrop-filter:blur(20px);
+    padding:45px;
+    border-radius:26px;
+    border:1px solid rgba(212,175,55,0.25);
+    box-shadow:0 30px 100px rgba(0,0,0,0.8);
     animation:fadeUp 0.8s ease;
 }
 @keyframes fadeUp{
@@ -72,125 +48,146 @@ body::after{
 
 .brand-header{
     text-align:center;
-    font-size:26px;
+    font-size:28px;
     font-weight:600;
-    background:linear-gradient(90deg,#00c6ff,#0072ff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+    letter-spacing:1px;
+    color:#d4af37;
     margin-bottom:12px;
 }
 
 .subtitle{
     text-align:center;
     font-size:14px;
-    opacity:0.7;
-    margin-bottom:30px;
+    opacity:0.6;
+    margin-bottom:35px;
 }
 
-/* Floating inputs */
+/* Floating Inputs */
 .input-group{
     position:relative;
-    margin:22px 0;
+    margin:24px 0;
 }
 .input-group input{
     width:100%;
-    padding:16px 14px;
-    border-radius:14px;
-    background:rgba(255,255,255,0.08);
-    border:none;
+    padding:18px 16px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(212,175,55,0.2);
     color:white;
     transition:0.3s;
 }
 .input-group label{
     position:absolute;
-    left:14px;
-    top:16px;
+    left:16px;
+    top:18px;
     color:#aaa;
     transition:0.3s;
     pointer-events:none;
 }
+.input-group input:focus{
+    border-color:#d4af37;
+    box-shadow:0 0 0 2px rgba(212,175,55,0.2);
+}
 .input-group input:focus + label,
 .input-group input:not(:placeholder-shown) + label{
-    top:-8px;
-    left:10px;
+    top:-10px;
+    left:14px;
     font-size:11px;
-    background:#0f172a;
+    background:#0b0b0f;
     padding:0 6px;
-}
-input:focus{
-    outline:none;
-    background:rgba(255,255,255,0.15);
+    color:#d4af37;
 }
 
-/* Buttons */
+/* Premium Gold Button */
 button{
     width:100%;
-    padding:14px;
+    padding:16px;
     border:none;
-    border-radius:14px;
+    border-radius:18px;
     font-weight:600;
     cursor:pointer;
-    margin-top:20px;
-    background:linear-gradient(90deg,#00c6ff,#0072ff);
-    color:white;
+    margin-top:30px;
+    background:linear-gradient(90deg,#d4af37,#b8860b);
+    color:#0b0b0f;
     transition:0.3s;
+    position:relative;
+    overflow:hidden;
 }
 button:hover{
     transform:translateY(-3px);
-    box-shadow:0 10px 25px rgba(0,114,255,0.3);
+    box-shadow:0 15px 40px rgba(212,175,55,0.4);
 }
 
-/* Offer cards */
+/* Luxury shimmer effect */
+button::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+    transition:0.5s;
+}
+button:hover::before{
+    left:100%;
+}
+
+/* Offer Cards */
 .offer{
-    margin-top:30px;
-    padding:24px;
-    border-radius:20px;
-    background:rgba(255,255,255,0.08);
+    margin-top:35px;
+    padding:28px;
+    border-radius:22px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(212,175,55,0.15);
     transition:0.3s;
 }
 .offer:hover{
-    background:rgba(255,255,255,0.12);
-    transform:translateY(-5px);
+    border-color:#d4af37;
+    box-shadow:0 20px 60px rgba(212,175,55,0.15);
 }
+
 .offer-title{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:14px;
     font-weight:600;
-    font-size:16px;
+    font-size:17px;
+    color:#d4af37;
 }
+
 .rules{
     font-size:13px;
-    opacity:0.85;
-    margin-top:14px;
-    line-height:1.6;
+    opacity:0.75;
+    margin-top:18px;
+    line-height:1.7;
 }
 
 .hidden{display:none}
 
-/* Success animation */
+/* Success Animation */
 .success{
     text-align:center;
-    padding:40px;
+    padding:50px;
 }
 .checkmark{
-    width:80px;
-    height:80px;
+    width:90px;
+    height:90px;
     border-radius:50%;
-    background:linear-gradient(90deg,#00c6ff,#0072ff);
-    margin:20px auto;
+    border:3px solid #d4af37;
+    margin:25px auto;
     position:relative;
     animation:scaleIn 0.5s ease;
 }
 .checkmark::after{
     content:"";
     position:absolute;
-    left:26px;
-    top:42px;
+    left:28px;
+    top:50px;
     width:28px;
     height:14px;
-    border-left:5px solid white;
-    border-bottom:5px solid white;
+    border-left:4px solid #d4af37;
+    border-bottom:4px solid #d4af37;
     transform:rotate(-45deg);
 }
 @keyframes scaleIn{
@@ -202,13 +199,15 @@ button:hover{
     text-align:center;
     font-size:12px;
     opacity:0.5;
-    margin-top:30px;
+    margin-top:35px;
 }
 .footer a{
-    color:#bbb;
+    color:#888;
     text-decoration:none;
 }
-.footer a:hover{text-decoration:underline}
+.footer a:hover{
+    color:#d4af37;
+}
 
 .logo{width:30px;height:30px}
 </style>
@@ -220,7 +219,7 @@ button:hover{
 
 <div id="step1">
     <div class="brand-header">Earn-Easy</div>
-    <div class="subtitle">Premium Cashback Access Portal</div>
+    <div class="subtitle">Private Cashback Access Portal</div>
 
     <div class="input-group">
         <input type="text" id="name" placeholder=" " required>
@@ -244,11 +243,7 @@ button:hover{
 
     <div class="offer">
         <div class="offer-title">
-            <svg class="logo" viewBox="0 0 200 50">
-                <text x="0" y="35" font-size="35" fill="#00baf2" font-weight="bold">Pay</text>
-                <text x="80" y="35" font-size="35" fill="#003366" font-weight="bold">tm</text>
-            </svg>
-            ₹50 Cashback
+            Paytm – ₹50 Cashback
         </div>
         <div class="rules">
             • New users only<br>
@@ -257,19 +252,13 @@ button:hover{
             • Cashback in 24–48 hours
         </div>
         <button onclick="confirmOffer('Paytm','https://p.paytm.me/xCTH/ueupfch7?utmt=021222')">
-        Agree & Continue
+        Proceed Securely
         </button>
     </div>
 
     <div class="offer">
         <div class="offer-title">
-            <svg class="logo" viewBox="0 0 200 50">
-                <text x="0" y="35" font-size="35" fill="#4285F4" font-weight="bold">G</text>
-                <text x="25" y="35" font-size="35" fill="#EA4335" font-weight="bold">o</text>
-                <text x="50" y="35" font-size="35" fill="#FBBC05" font-weight="bold">o</text>
-                <text x="75" y="35" font-size="35" fill="#34A853" font-weight="bold">gle</text>
-            </svg>
-            ₹50 + ₹50 Bonus
+            Google Pay – ₹50 + ₹50 Bonus
         </div>
         <div class="rules">
             • New Google Pay account only<br>
@@ -278,7 +267,7 @@ button:hover{
             • Extra ₹50 after 4 weeks activity
         </div>
         <button onclick="confirmOffer('Google Pay','https://gpay.app.goo.gl/invite-n781m0d')">
-        Agree & Continue
+        Proceed Securely
         </button>
     </div>
 
@@ -286,8 +275,8 @@ button:hover{
 
 <div id="success" class="hidden success">
     <div class="checkmark"></div>
-    <h3>Verified Successfully</h3>
-    <p>Redirecting securely...</p>
+    <h3>Verified</h3>
+    <p>Redirecting to secure partner...</p>
 </div>
 
 <div class="footer">
@@ -307,23 +296,9 @@ function validateAndContinue(){
     document.getElementById("step1").classList.add("hidden");
     document.getElementById("step2").classList.remove("hidden");
 }
-
 function confirmOffer(offer,link){
     document.getElementById("step2").classList.add("hidden");
     document.getElementById("success").classList.remove("hidden");
-
-    fetch("https://formsubmit.co/ajax/earneasy2026@gmail.com",{
-        method:"POST",
-        headers:{"Content-Type":"application/json","Accept":"application/json"},
-        body:JSON.stringify({
-            Name:document.getElementById("name").value,
-            Phone:document.getElementById("phone").value,
-            UPI:document.getElementById("upi").value,
-            Offer_Selected:offer,
-            Date:new Date().toLocaleString()
-        })
-    });
-
     setTimeout(()=>{window.location.href=link;},2000);
 }
 </script>
